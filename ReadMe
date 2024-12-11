@@ -1,0 +1,30 @@
+### Simple Express App
+
+This is a simple Express application built with Node.js. It provides basic CRUD operations with user authentication and task management. 
+The app uses MongoDB for data storage and JWT (JSON Web Tokens) for user authentication.
+
+### Features
+- User Authentication (Login)
+- Task Management (Create, Read, Update, Delete)
+- JWT Authentication for protected routes
+- Environment Configuration using dotenv
+- Middleware for protecting routes
+
+### Cloning command
+- git clone https://github.com/Talha-crypto/simple_express_app.git
+
+### Installations
+- need Node installed
+- npm install for installing the required packages
+
+### Database used
+- mongoBD
+- username : talhawalker
+- password : 1JhYKISQOU2JPJK0
+
+
+### Credentials for testing application
+- email :  talha@gmail.com
+- password : test@1234
+
+
