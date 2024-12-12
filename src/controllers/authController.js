@@ -14,15 +14,15 @@ export async function login(req, res) {
         expiresIn: "1h",
       });
 
-      res.status(200).json({
+      res.status(HttpStatus.OK).json({
         message: "Login successful",
         token,
-        code: 200,
+        code: HttpStatus.OK,
       });
     } else {
-      return res.status(401).json({
+      return res.status(HttpStatus.UNAUTHORIZED).json({
         message: "Invalid credentials",
-        code: 401,
+        code: HttpStatus.UNAUTHORIZED,
       });
     }
   } catch (error) {
@@ -39,12 +39,10 @@ export async function signup(req, res) {
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res
-        .status(HttpStatus.BAD_REQUEST)
-        .json({
-          message: "Email already exists",
-          code: HttpStatus.BAD_REQUEST,
-        });
+      return res.status(HttpStatus.BAD_REQUEST).json({
+        message: "Email already exists",
+        code: HttpStatus.BAD_REQUEST,
+      });
     }
 
     const saltRounds = 10;
