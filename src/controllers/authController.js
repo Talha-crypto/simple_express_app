@@ -5,9 +5,21 @@ import User from "../models/user.js";
 
 export async function login(req, res) {
   const { email, password } = req.body;
+
   try {
     const user = await User.findOne({ email });
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!user) {
+      return res.status(HttpStatus.NOT_FOUND).json({
+        message: "User not found",
+        code: HttpStatus.NOT_FOUND,
+      });
+    }
+    const trimmedPassword = password.trim();
+    const isPasswordValid = await bcrypt.compare(
+      trimmedPassword,
+      user.password
+    );
 
     if (isPasswordValid) {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -26,7 +38,7 @@ export async function login(req, res) {
       });
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error during login:", error);
     res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
       message: "Internal server error",
       code: HttpStatus.INTERNAL_SERVER_ERROR,
